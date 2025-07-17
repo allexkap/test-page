@@ -34,22 +34,26 @@ jobs:
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
+
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 10
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
       - name: Build project
-        run: pnpm run build
-        
+        run: pnpm build
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          path: ./dist
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
